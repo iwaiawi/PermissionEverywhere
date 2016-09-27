@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
  */
 public class PermissionResponse {
     String[] permission;
-    int [] grantResult;
+    int[] grantResult;
     int requestCode;
 
     public PermissionResponse(String[] permission, int[] grantResult, int requestCode) {
@@ -16,8 +16,8 @@ public class PermissionResponse {
         this.requestCode = requestCode;
     }
 
-    public boolean isGranted(){
-        if(grantResult != null && grantResult.length>0 && grantResult[0] == PackageManager.PERMISSION_GRANTED){
+    public boolean isGranted() {
+        if (grantResult != null && grantResult.length > 0 && grantResult[0] == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
         return false;

@@ -18,16 +18,16 @@ public class PermissionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getIntent() != null) {
+        if (getIntent() != null) {
             resultReceiver = getIntent().getParcelableExtra(Const.RESULT_RECEIVER);
             String[] permissionsArray = getIntent().getStringArrayExtra(Const.PERMISSIONS_ARRAY);
             int requestCode = getIntent().getIntExtra(Const.REQUEST_CODE, Const.DEFAULT_CODE);
-            if(!hasPermissions(permissionsArray)) {
+            if (!hasPermissions(permissionsArray)) {
                 ActivityCompat.requestPermissions(this, permissionsArray, requestCode);
-            }else {
+            } else {
                 onComplete(requestCode, permissionsArray, new int[]{PackageManager.PERMISSION_GRANTED});
             }
-        }else {
+        } else {
             finish();
         }
     }
@@ -44,8 +44,8 @@ public class PermissionActivity extends Activity {
 
     private boolean hasPermissions(String[] permissionsArray) {
         boolean result = true;
-        for(String permission:permissionsArray) {
-            if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+        for (String permission : permissionsArray) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 result = false;
                 break;
             }

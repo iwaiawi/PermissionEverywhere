@@ -12,7 +12,7 @@ public class PermissionEverywhere {
                                                   int requestCode,
                                                   String notificationTitle,
                                                   String notificationText,
-                                                  @DrawableRes int notificationIcon){
+                                                  @DrawableRes int notificationIcon) {
         return new PermissionRequest(context, permissions, requestCode,
                 notificationTitle, notificationText, notificationIcon);
     }
