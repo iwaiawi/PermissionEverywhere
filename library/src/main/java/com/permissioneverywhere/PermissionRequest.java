@@ -14,26 +14,22 @@ public class PermissionRequest {
     final Context context;
     final String[] permissions;
     final int requestCode;
-    final String notificationTitle;
-    final String notificationText;
-    final int icon;
+    final NotificationCustomizer customizer;
 
     PermissionResponse response;
 
-    public PermissionRequest(final Context context, final String[] permissions, final int requestCode, final String notificationTitle, final String notificationText, final int icon) {
+    public PermissionRequest(final Context context, final String[] permissions, final int requestCode, final NotificationCustomizer customizer) {
         this.context = context;
         this.permissions = permissions;
         this.requestCode = requestCode;
-        this.notificationTitle = notificationTitle;
-        this.notificationText = notificationText;
-        this.icon = icon;
+        this.customizer = customizer;
     }
 
     public PermissionResponse call() throws InterruptedException {
         if (!Util.hasPermission(context, permissions)) {
             final Object lock = new Object();
-            NotificationHelper.sendNotification(context, permissions, requestCode,
-                    notificationTitle, notificationText, icon, new ResultReceiver(new Handler(Looper.getMainLooper())) {
+            NotificationHelper.sendNotification(context, permissions, requestCode, customizer,
+                    new ResultReceiver(new Handler(Looper.getMainLooper())) {
                         @Override
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             super.onReceiveResult(resultCode, resultData);
@@ -58,8 +54,8 @@ public class PermissionRequest {
 
     public void enqueue(final PermissionResultCallback callback) {
         if (!Util.hasPermission(context, permissions)) {
-            NotificationHelper.sendNotification(context, permissions, requestCode,
-                    notificationTitle, notificationText, icon, new ResultReceiver(new Handler()) {
+            NotificationHelper.sendNotification(context, permissions, requestCode, customizer,
+                    new ResultReceiver(new Handler()) {
                         @Override
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             super.onReceiveResult(resultCode, resultData);
