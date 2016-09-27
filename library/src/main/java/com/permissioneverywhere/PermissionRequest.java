@@ -11,16 +11,16 @@ import android.support.v4.os.ResultReceiver;
  * Created by Farruxx on 30.04.2016.
  */
 public class PermissionRequest {
-    Context context;
-    String[] permissions;
-    int requestCode;
-    String notificationTitle;
-    String notificationText;
-    int icon;
+    final Context context;
+    final String[] permissions;
+    final int requestCode;
+    final String notificationTitle;
+    final String notificationText;
+    final int icon;
 
     PermissionResponse response;
 
-    public PermissionRequest(Context context, String[] permissions, int requestCode, String notificationTitle, String notificationText, int icon) {
+    public PermissionRequest(final Context context, final String[] permissions, final int requestCode, final String notificationTitle, final String notificationText, final int icon) {
         this.context = context;
         this.permissions = permissions;
         this.requestCode = requestCode;
@@ -37,8 +37,8 @@ public class PermissionRequest {
                         @Override
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             super.onReceiveResult(resultCode, resultData);
-                            int[] grantResult = resultData.getIntArray(Const.GRANT_RESULT);
-                            String[] permissions = resultData.getStringArray(Const.PERMISSIONS_ARRAY);
+                            final int[] grantResult = resultData.getIntArray(Const.GRANT_RESULT);
+                            final String[] permissions = resultData.getStringArray(Const.PERMISSIONS_ARRAY);
                             response = new PermissionResponse(permissions, grantResult, resultCode);
 
                             synchronized (lock) {
@@ -63,8 +63,8 @@ public class PermissionRequest {
                         @Override
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             super.onReceiveResult(resultCode, resultData);
-                            int[] grantResult = resultData.getIntArray(Const.GRANT_RESULT);
-                            String[] permissions = resultData.getStringArray(Const.PERMISSIONS_ARRAY);
+                            final int[] grantResult = resultData.getIntArray(Const.GRANT_RESULT);
+                            final String[] permissions = resultData.getStringArray(Const.PERMISSIONS_ARRAY);
                             response = new PermissionResponse(permissions, grantResult, resultCode);
                             callback.onComplete(new PermissionResponse(permissions, grantResult, resultCode));
                         }

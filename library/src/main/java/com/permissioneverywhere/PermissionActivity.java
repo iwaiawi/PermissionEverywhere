@@ -20,8 +20,8 @@ public class PermissionActivity extends Activity {
 
         if (getIntent() != null) {
             resultReceiver = getIntent().getParcelableExtra(Const.RESULT_RECEIVER);
-            String[] permissionsArray = getIntent().getStringArrayExtra(Const.PERMISSIONS_ARRAY);
-            int requestCode = getIntent().getIntExtra(Const.REQUEST_CODE, Const.DEFAULT_CODE);
+            final String[] permissionsArray = getIntent().getStringArrayExtra(Const.PERMISSIONS_ARRAY);
+            final int requestCode = getIntent().getIntExtra(Const.REQUEST_CODE, Const.DEFAULT_CODE);
             if (!hasPermissions(permissionsArray)) {
                 ActivityCompat.requestPermissions(this, permissionsArray, requestCode);
             } else {
@@ -54,7 +54,7 @@ public class PermissionActivity extends Activity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(final int requestCode, final String[] permissions, final int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         onComplete(requestCode, permissions, grantResults);
     }
