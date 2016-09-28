@@ -33,7 +33,7 @@ public class TestService extends Service {
         super.onCreate();
         boolean asyncTest = true;
 
-        if(asyncTest) {
+        if (asyncTest) {
 
             new AsyncTask<Void, Void, Boolean>() {
 
@@ -60,7 +60,7 @@ public class TestService extends Service {
             }.execute();
 
 
-        }else {
+        } else {
 
 
             PermissionEverywhere.getPermission(getApplicationContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
